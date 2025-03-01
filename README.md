@@ -1,39 +1,48 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Guide
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Guide is a Dart package that provides a centralized navigation management system for Flutter applications. It uses a `GlobalKey<NavigatorState>` to handle navigation globally, allowing seamless routing without requiring direct access to the `BuildContext` in every widget.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+### Initialize Guide
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:guide/guide.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      navigatorKey: Guide.routerKey,
+      home: HomeScreen(),
+    );
+  }
+}
 ```
 
-## Additional information
+### Navigate to Another Screen
+```dart
+Guide.goTo('/details', arguments: {'id': 42});
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+### Pop the Current Screen
+```dart
+Guide.goBack();
+```
+### Go to the First Screen
+```dart
+Guide.reset();
+```
+
+## API Reference
+- `Guide.goTo(String routeName, {Object? arguments})` - Navigates to the specified route.
+- `Guide.goBack()` - Pops the current route from the navigation stack.
+- `Guide.reset()` - Pops all routes from the navigation stack.
+
+## License
+This project is licensed under the MIT License.
+
